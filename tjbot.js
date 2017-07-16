@@ -16,10 +16,13 @@ var tj = new TJBot(hardware, configuration, credentials);
 
 function testLed(){
   console.log("test leds");
+  console.log("red");
   led.setLED(1,0,0);
   tj.sleep(500);
+  console.log("green");
   led.setLED(0,1,0);
   tj.sleep(500);
+  console.log("blue");
   led.setLED(0,0,1);
   tj.sleep(500);
 }
