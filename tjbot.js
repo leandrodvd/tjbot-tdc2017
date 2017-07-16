@@ -9,9 +9,12 @@ console.log("Default listen config:")
 console.log(TJBot.prototype.languages.listen)
 
 console.log("init tjbot");
-var hardware = ['led', 'microphone', 'servo','speaker'];
+var hardware = [ 'microphone','speaker', 'servo'];
+
 var configuration = require('./config.js');
 var credentials = require('./credentials.js');
+console.log("configuration:");
+console.log(configuration);
 var tj = new TJBot(hardware, configuration, credentials);
 
 function testLed(){
@@ -32,15 +35,15 @@ function testServo(){
   tj.wave();
 }
 
-function testSTT(){
-  console.log("test speech to text");
-  tj.speak("1 2 3 4 5 6");
+function testTTS(){
+  console.log("test Text To Speech");
+  tj.speak("testando 1 2 3");
 }
 
 function test(){
   testLed();
   testServo();
-  testSTT();
+  testTTS();
 }
 
 test();
