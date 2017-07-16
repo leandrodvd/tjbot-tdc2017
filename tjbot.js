@@ -13,6 +13,8 @@ var hardware = [ 'microphone','speaker', 'servo'];
 
 var configuration = require('./config.js');
 var credentials = require('./credentials.js');
+var workspace_id = credentials.workspace_id[config.listen.language]
+console.log("workspace_id:"+workspace_id);
 console.log("configuration:");
 console.log(configuration);
 var tj = new TJBot(hardware, configuration, credentials);
@@ -37,7 +39,7 @@ function testServo(){
 
 function testTTS(){
   console.log("test Text To Speech");
-  tj.speak("testando 1 2 3");
+  tj.speak("teste 1 2 3");
 }
 
 function test(){
@@ -47,3 +49,14 @@ function test(){
 }
 
 test();
+
+// listen for utterances and send the result to
+// the Conversation service
+tj.listen(function(msg) {
+  // send to the conversation service
+    tj.converse(workspace_id, turn, function(response) {
+      // speak the result
+      console.log(response);
+      tj.speak(response.description);
+    });
+});
