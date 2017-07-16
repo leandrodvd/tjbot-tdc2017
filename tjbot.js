@@ -53,6 +53,13 @@ function test(){
 
 test();
 
+function r01(){
+  // return a random 0 or 1
+  return Math.round(Math.random());
+}
+function randomColor(){
+  led.setLED(r01(),r01(),r01());
+}
 // listen for utterances and send the result to
 // the Conversation service
 tj.listen(function(msg) {
@@ -61,6 +68,7 @@ tj.listen(function(msg) {
     tj.converse(workspace_id, msg, function(response) {
       // speak the result
       console.log(response);
+      response = processResponse(response);
       tj.pauseListening();
       var speakPromise = tj.speak(response.description);
       if (speakPromise != undefined){
@@ -80,6 +88,9 @@ function processResponse(response){
       var message = new Date().toLocaleTimeString();
       response.output.text[0]=message;
       response.description=message;
+    }
+    else if(intent=='changeColor'){
+      randomColor();
     }
   }
   return response;
