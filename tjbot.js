@@ -1,5 +1,5 @@
 const TJBot = require('tjbot');
-const led = require('lib/led.js');
+const led = require('./lib/led.js');
 
 console.log("Default configuration:" )
 console.log(TJBot.prototype.defaultConfiguration);
