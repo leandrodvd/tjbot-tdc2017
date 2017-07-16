@@ -13,10 +13,13 @@ var hardware = [ 'microphone','speaker', 'servo'];
 
 var configuration = require('./config.js');
 var credentials = require('./credentials.js');
-var workspace_id = credentials.workspace_id[config.listen.language]
-console.log("workspace_id:"+workspace_id);
 console.log("configuration:");
 console.log(configuration);
+console.log("credentials:");
+console.log(credentials);
+var workspace_id = credentials.conversation.workspace_id[configuration.listen.language]
+console.log("workspace_id:"+workspace_id);
+
 var tj = new TJBot(hardware, configuration, credentials);
 
 function testLed(){
@@ -54,9 +57,18 @@ test();
 // the Conversation service
 tj.listen(function(msg) {
   // send to the conversation service
-    tj.converse(workspace_id, turn, function(response) {
+    console.log(msg);
+    tj.converse(workspace_id, msg, function(response) {
       // speak the result
       console.log(response);
-      tj.speak(response.description);
+      tj.pauseListening();
+      var speakPromise = tj.speak(response.description);
+      if (speakPromise != undefined){
+	speakPromise.then(function(){tj.resumeListening()} );
+      }
+	else{
+	 console.log("speak promise is undefined");
+	 tj.resumeListening();
+	}
     });
 });
