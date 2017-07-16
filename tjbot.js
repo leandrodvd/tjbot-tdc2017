@@ -26,12 +26,12 @@ function testLed(){
 
 function testServo(){
   console.log("test servo arm");
-  tjbot.wave();
+  tj.wave();
 }
 
 function testSTT(){
   console.log("test speech to text");
-  tjbot.speak("1 2 3 4 5 6");
+  tj.speak("1 2 3 4 5 6");
 }
 
 function test(){
