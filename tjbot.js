@@ -42,7 +42,7 @@ function testServo(){
 
 function testTTS(){
   console.log("test Text To Speech");
-  tj.speak("teste 1 2 3");
+  tj.speak("Olá");
 }
 
 function test(){
@@ -72,3 +72,15 @@ tj.listen(function(msg) {
 	}
     });
 });
+
+function processResponse(response){
+  if (response.object.intents && response.object.intents.length>0){
+    var intent =  response.object.intents[0].intent;
+    if (intent =='time'){
+      var message = new Date().toLocaleTimeString();
+      response.output.text[0]=message;
+      response.description=message;
+    }
+  }
+  return response;
+}
