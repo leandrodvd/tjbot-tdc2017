@@ -58,7 +58,11 @@ function r01(){
   return Math.round(Math.random());
 }
 function randomColor(){
-  led.setLED(r01(),r01(),r01());
+  var r = r01();
+  var g = r01();
+  var b = r01();
+ console.log("change color to:"+r+" "+g+" "+ b);
+  led.setLED(r,g,b);
 }
 // listen for utterances and send the result to
 // the Conversation service
@@ -86,11 +90,18 @@ function processResponse(response){
     var intent =  response.object.intents[0].intent;
     if (intent =='time'){
       var message = new Date().toLocaleTimeString();
-      response.output.text[0]=message;
+      response.object.output.text[0]=message;
       response.description=message;
     }
     else if(intent=='changeColor'){
+      console.log("change color");
       randomColor();
+    }
+    else if(intent=='arms'){
+     console.log("wave arm");
+     tj.wave();
+     tj.wave();
+     tj.wave();
     }
   }
   return response;
