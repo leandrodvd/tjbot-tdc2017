@@ -76,7 +76,9 @@ tj.listen(function(msg) {
       tj.pauseListening();
       var speakPromise = tj.speak(response.description);
       if (speakPromise != undefined){
-	speakPromise.then(function(){tj.resumeListening()} );
+	speakPromise.then(function(){
+	executeAction(response);
+	tj.resumeListening()} );
       }
 	else{
 	 console.log("speak promise is undefined");
@@ -90,12 +92,31 @@ function processResponse(response){
     var intent =  response.object.intents[0].intent;
     if (intent =='time'){
       var message = new Date().toLocaleTimeString();
+      console.log("message replaced: "+message);
       response.object.output.text[0]=message;
       response.description=message;
     }
-    else if(intent=='changeColor'){
+  }
+  return response;
+}
+
+function executeAction(response){
+  if (response.object.intents && response.object.intents.length>0){
+    var intent =  response.object.intents[0].intent;
+    if(intent=='changeColor'){
       console.log("change color");
       randomColor();
+    }
+    else if(intent=='folks'){
+      console.log("folks wave");
+      tj.wave();
+      tj.wave();
+      tj.wave();
+    }
+    else if(intent=='bye'){
+      console.log("bye wave");
+      tj.wave();
+      tj.wave();
     }
     else if(intent=='arms'){
      console.log("wave arm");
@@ -106,3 +127,4 @@ function processResponse(response){
   }
   return response;
 }
+
