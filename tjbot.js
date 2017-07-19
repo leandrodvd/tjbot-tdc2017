@@ -43,7 +43,7 @@ function testServo(){
 
 function testTTS(){
   console.log("test Text To Speech");
-  tj.speak("Olá");
+  tj.speak("Hello World");
 }
 
 function test(){
@@ -101,8 +101,9 @@ function getWeather(callback){
     }
     else{
       var obs_json = JSON.parse(body)
-      message = "O tempo lá fora está " + obs_json.observation.wx_phrase + " e a temperatura é de " + obs_json.observation.temp + " graus celsius";
+      message = "O tempo lá fora está " + obs_json.observation.wx_phrase + " e a temperatura é de " + obs_json.observation.temp + " graus célsius";
     }
+    console.log(message);
     return callback(error,message);
   });
 }
