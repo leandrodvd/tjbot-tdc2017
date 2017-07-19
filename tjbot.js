@@ -25,13 +25,13 @@ var tj = new TJBot(hardware, configuration, credentials);
 function testLed(){
   console.log("test leds");
   console.log("red");
-  led.setLED(1,0,0);
+  led.setLED(0,1,1);
   tj.sleep(500);
   console.log("green");
-  led.setLED(0,1,0);
+  led.setLED(1,0,1);
   tj.sleep(500);
   console.log("blue");
-  led.setLED(0,0,1);
+  led.setLED(1,1,0);
   tj.sleep(500);
 }
 
@@ -91,7 +91,7 @@ function processResponse(response){
   if (response.object.intents && response.object.intents.length>0){
     var intent =  response.object.intents[0].intent;
     if (intent =='time'){
-      var message = new Date().toLocaleTimeString();
+      var message = new Date().toLocaleTimeString().substring(0,5);
       console.log("message replaced: "+message);
       response.object.output.text[0]=message;
       response.description=message;
