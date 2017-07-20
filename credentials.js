@@ -26,6 +26,15 @@ module.exports = {
 		password: 'yyy'
 	},
 	visual_recognition: {
-		api_key: 'af9f4f4f1b2356c8af1b502d5ed00a9b2f97e8b4'
+		api_key: ''
+	},
+	weather:{
+	  "username": "",
+	  "password": "",
+	  "host": "twcservice.mybluemix.net",
+	  "port": 443,
+	  "url": "",
+		"lat": "-23.5999484",
+		"long": "-46.6769615"
 	}
 };
